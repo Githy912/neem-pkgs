@@ -1,0 +1,265 @@
+¿ math.nmlib — the Neem math library.
+¿ Pure Neem: only operators, fnc, struct, class, if/while.
+¿ This is the file `bring "math"` reads.
+
+¿ ------------------------------------------------------------
+¿ Constants
+¿ ------------------------------------------------------------
+
+? pi, 3.141592653589793
+? e, 2.718281828459045
+? tau, 6.283185307179586
+
+¿ ------------------------------------------------------------
+¿ Integer arithmetic
+¿ ------------------------------------------------------------
+
+fnc add(int a, int b) int {
+    return a + b
+}
+
+fnc sub(int a, int b) int {
+    return a - b
+}
+
+fnc mul(int a, int b) int {
+    return a * b
+}
+
+fnc idiv(int a, int b) int {
+    return a // b
+}
+
+fnc mod(int a, int b) int {
+    return a % b
+}
+
+fnc pow(int base, int exp) int {
+    return base ** exp
+}
+
+fnc abs(int n) int {
+    if n < 0 {
+        return -n
+    }
+    return n
+}
+
+fnc min(int a, int b) int {
+    if a < b {
+        return a
+    }
+    return b
+}
+
+fnc max(int a, int b) int {
+    if a > b {
+        return a
+    }
+    return b
+}
+
+fnc sign(int n) int {
+    if n < 0 {
+        return -1
+    }
+    if n > 0 {
+        return 1
+    }
+    return 0
+}
+
+fnc clamp(int v, int lo, int hi) int {
+    if v < lo {
+        return lo
+    }
+    if v > hi {
+        return hi
+    }
+    return v
+}
+
+fnc isEven(int n) bool {
+    return n % 2 = 0
+}
+
+fnc isOdd(int n) bool {
+    return !isEven(n)
+}
+
+fnc gcd(int a, int b) int {
+    int x, abs(a)
+    int y, abs(b)
+    while y > 0 {
+        int t, y
+        y, x % y
+        x, t
+    }
+    return x
+}
+
+fnc lcm(int a, int b) int {
+    if a = 0 $ b = 0 {
+        return 0
+    }
+    return abs(a * b) // gcd(a, b)
+}
+
+fnc fact(int n) int {
+    if n <= 1 {
+        return 1
+    }
+    return n * fact(n - 1)
+}
+
+fnc fib(int n) int {
+    if n <= 1 {
+        return n
+    }
+    return fib(n - 1) + fib(n - 2)
+}
+
+fnc sumTo(int n) int {
+    int total, 0
+    int i, 1
+    while i <= n {
+        total, total + i
+        i, i + 1
+    }
+    return total
+}
+
+fnc isPrime(int n) bool {
+    if n < 2 {
+        return no
+    }
+    int i, 2
+    while i * i <= n {
+        if n % i = 0 {
+            return no
+        }
+        i, i + 1
+    }
+    return yes
+}
+
+fnc sumDigits(int n) int {
+    int x, abs(n)
+    int total, 0
+    while x > 0 {
+        total, total + x % 10
+        x, x // 10
+    }
+    return total
+}
+
+¿ ------------------------------------------------------------
+¿ Float helpers
+¿ ------------------------------------------------------------
+
+fnc fabs(float x) float {
+    if x < 0.0 {
+        return -x
+    }
+    return x
+}
+
+fnc fmin(float a, float b) float {
+    if a < b {
+        return a
+    }
+    return b
+}
+
+fnc fmax(float a, float b) float {
+    if a > b {
+        return a
+    }
+    return b
+}
+
+fnc sqrt(float x) float {
+    return 2.0 /// x
+}
+
+fnc cbrt(float x) float {
+    return 3.0 /// x
+}
+
+fnc hypot(float a, float b) float {
+    return 2.0 /// (a * a + b * b)
+}
+
+fnc lerp(float a, float b, float t) float {
+    return a + (b - a) * t
+}
+
+fnc average(float a, float b) float {
+    return (a + b) / 2.0
+}
+
+fnc deg2rad(float d) float {
+    return d * pi / 180.0
+}
+
+fnc rad2deg(float r) float {
+    return r * 180.0 / pi
+}
+
+¿ ------------------------------------------------------------
+¿ 2D vectors
+¿ ------------------------------------------------------------
+
+struct Vec {
+    float x
+    float y
+}
+
+fnc vec(float x, float y) Vec {
+    return Vec(x, y)
+}
+
+fnc vadd(Vec a, Vec b) Vec {
+    return Vec(a.x + b.x, a.y + b.y)
+}
+
+fnc vsub(Vec a, Vec b) Vec {
+    return Vec(a.x - b.x, a.y - b.y)
+}
+
+fnc vscale(Vec a, float k) Vec {
+    return Vec(a.x * k, a.y * k)
+}
+
+fnc dot(Vec a, Vec b) float {
+    return a.x * b.x + a.y * b.y
+}
+
+fnc vlen(Vec a) float {
+    return 2.0 /// (a.x * a.x + a.y * a.y)
+}
+
+fnc dist(Vec a, Vec b) float {
+    return vlen(vsub(a, b))
+}
+
+¿ ------------------------------------------------------------
+¿ Circle
+¿ ------------------------------------------------------------
+
+class Circle {
+    float radius
+    Vec center
+
+    fnc area() float {
+        return pi * this.radius * this.radius
+    }
+
+    fnc circumference() float {
+        return tau * this.radius
+    }
+
+    fnc scale(float k) {
+        this.radius, this.radius * k
+    }
+}
